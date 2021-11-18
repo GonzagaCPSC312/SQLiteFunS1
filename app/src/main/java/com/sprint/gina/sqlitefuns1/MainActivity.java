@@ -54,6 +54,13 @@ public class MainActivity extends AppCompatActivity {
         helper.insertContact(contact);
         List<Contact> contacts = helper.getSelectAllContacts();
         Log.d(TAG, "onCreate: " + contacts);
+        Contact updatedContact = new Contact(1, "SPIKE",
+                "208-208-2085", -1);
+        helper.updateContactById(updatedContact);
+        // TODO: fix this!! after you start deleting records
+        // you can't insert again and expect the adapter to
+        // work when we call position + 1 (BIG BUG)
+        helper.deleteAllContacts();
     }
 
     class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder> {

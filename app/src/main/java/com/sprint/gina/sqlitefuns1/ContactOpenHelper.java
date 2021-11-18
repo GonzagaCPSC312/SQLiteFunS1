@@ -112,4 +112,22 @@ public class ContactOpenHelper extends SQLiteOpenHelper {
         }
         return contact;
     }
+
+    public void updateContactById(Contact contact) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(NAME, contact.getName());
+        contentValues.put(PHONE_NUMBER, contact.getPhoneNumber());
+        contentValues.put(IMAGE_RESOURCE_ID, contact.getImageResourceId());
+
+        SQLiteDatabase db = getWritableDatabase();
+        db.update(CONTACTS_TABLE, contentValues, ID + "=?",
+                new String[]{"" + contact.getId()});
+        db.close();
+    }
+
+    public void deleteAllContacts() {
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(CONTACTS_TABLE, null, null);
+        db.close();
+    }
 }
